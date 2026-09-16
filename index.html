@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="pt-BR">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Corrente - Previsibilidade de Demanda</title>
+  <script src="/_sdk/data_sdk.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="estilos.css">
+  <style>@view-transition { navigation: auto; }</style>
+  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
+ </head>
+ <body><!-- Login Screen -->
+  <div class="login-screen" id="loginScreen">
+   <div class="login-container">
+    <div class="login-header">
+     <div class="login-logo">
+      <svg class="logo-svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><defs>
+        <lineargradient id="loginLogoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+         <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+         <stop offset="100%" style="stop-color:#e6f3ff;stop-opacity:0.9" />
+        </lineargradient>
+       </defs> <g fill="url(#loginLogoGradient)" stroke="none">
+        <ellipse cx="25" cy="35" rx="8" ry="12" transform="rotate(-15 25 35)" opacity="0.9" />
+        <ellipse cx="40" cy="25" rx="8" ry="12" transform="rotate(15 40 25)" opacity="0.9" />
+        <ellipse cx="55" cy="35" rx="8" ry="12" transform="rotate(-15 55 35)" opacity="0.9" />
+        <ellipse cx="70" cy="25" rx="8" ry="12" transform="rotate(15 70 25)" opacity="0.9" />
+       </g>
+      </svg>
+     </div>
+     <h1 class="login-title">Nova Corrente</h1>
+     <p class="login-subtitle">Previsibilidade de Demanda</p>
+    </div>
+    <form class="login-form" id="loginForm">
+     <div class="login-field"><input type="text" id="loginUsername" placeholder=" " required> <label for="loginUsername">Usuário</label>
+     </div>
+     <div class="login-field"><input type="password" id="loginPassword" placeholder=" " required> <label for="loginPassword">Senha</label>
+     </div>
+     <div class="login-options"><label class="remember-me"> <input type="checkbox" id="rememberMe"> <span>Lembrar-me</span> </label> <a href="#" class="forgot-password" onclick="showForgotPassword()">Esqueceu a senha?</a>
+     </div><button type="submit" class="login-btn" id="loginBtn"> Entrar no Sistema </button>
+    </form>
+    <div class="login-footer">
+     <div class="create-account">
+      Não tem uma conta? <a href="#" onclick="showCreateAccount()">Criar conta</a>
+     </div>
+    </div>
+   </div>
+  </div>
+  <div class="app-container" id="appContainer" style="display: none;"><!-- Sidebar -->
+   <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+     <div class="logo">
+      <div class="logo-icon">
+       <svg class="logo-svg" viewbox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"><!-- Círculo base com gradiente --> <defs>
+         <lineargradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+          <stop offset="50%" style="stop-color:#e6f3ff;stop-opacity:0.9" />
+          <stop offset="100%" style="stop-color:#cce7ff;stop-opacity:0.8" />
+         </lineargradient>
+         <lineargradient id="chainGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+          <stop offset="100%" style="stop-color:#b3d9ff;stop-opacity:0.9" />
+         </lineargradient>
+        </defs> <!-- Corrente principal - elos conectados --> <g fill="url(#chainGradient)" stroke="none"><!-- Elo 1 -->
+         <ellipse cx="25" cy="35" rx="8" ry="12" transform="rotate(-15 25 35)" opacity="0.9" />
+         <ellipse cx="25" cy="35" rx="5" ry="9" transform="rotate(-15 25 35)" fill="none" stroke="url(#logoGradient)" stroke-width="1.5" /> <!-- Elo 2 -->
+         <ellipse cx="40" cy="25" rx="8" ry="12" transform="rotate(15 40 25)" opacity="0.9" />
+         <ellipse cx="40" cy="25" rx="5" ry="9" transform="rotate(15 40 25)" fill="none" stroke="url(#logoGradient)" stroke-width="1.5" /> <!-- Elo 3 -->
+         <ellipse cx="55" cy="35" rx="8" ry="12" transform="rotate(-15 55 35)" opacity="0.9" />
+         <ellipse cx="55" cy="35" rx="5" ry="9" transform="rotate(-15 55 35)" fill="none" stroke="url(#logoGradient)" stroke-width="1.5" /> <!-- Elo 4 -->
+         <ellipse cx="70" cy="25" rx="8" ry="12" transform="rotate(15 70 25)" opacity="0.9" />
+         <ellipse cx="70" cy="25" rx="5" ry="9" transform="rotate(15 70 25)" fill="none" stroke="url(#logoGradient)" stroke-width="1.5" />
+        </g> <!-- Corrente secundária - fluxo --> <g fill="url(#chainGradient)" opacity="0.7"><!-- Elo inferior 1 -->
+         <ellipse cx="30" cy="55" rx="6" ry="10" transform="rotate(10 30 55)" />
+         <ellipse cx="30" cy="55" rx="3.5" ry="7" transform="rotate(10 30 55)" fill="none" stroke="url(#logoGradient)" stroke-width="1" /> <!-- Elo inferior 2 -->
+         <ellipse cx="45" cy="65" rx="6" ry="10" transform="rotate(-10 45 65)" />
+         <ellipse cx="45" cy="65" rx="3.5" ry="7" transform="rotate(-10 45 65)" fill="none" stroke="url(#logoGradient)" stroke-width="1" /> <!-- Elo inferior 3 -->
+         <ellipse cx="60" cy="55" rx="6" ry="10" transform="rotate(10 60 55)" />
+         <ellipse cx="60" cy="55" rx="3.5" ry="7" transform="rotate(10 60 55)" fill="none" stroke="url(#logoGradient)" stroke-width="1" />
+        </g> <!-- Elemento de inovação - raio/energia --> <g stroke="url(#logoGradient)" stroke-width="2" fill="none" opacity="0.8">
+         <path d="M75 15 L85 25 L80 30 L90 40" stroke-linecap="round" />
+         <path d="M15 75 L25 85 L20 90 L30 100" stroke-linecap="round" />
+        </g> <!-- Pontos de conexão --> <g fill="url(#logoGradient)">
+         <circle cx="50" cy="50" r="2" opacity="0.6" />
+         <circle cx="35" cy="40" r="1.5" opacity="0.5" />
+         <circle cx="65" cy="40" r="1.5" opacity="0.5" />
+        </g>
+       </svg>
+      </div>
+      <div class="logo-text">
+       <h1 id="appTitle">Nova Corrente</h1>
+       <p id="appSubtitle">Previsibilidade de Demanda</p>
+      </div>
+     </div>
+    </div>
+    <nav class="nav-menu">
+     <div class="nav-section">
+      <div class="nav-section-title">
+       Principal
+      </div>
+      <div class="nav-item active" data-page="dashboard">
+       <div class="nav-icon">
+        📊
+       </div><span>Dashboard</span>
+      </div>
+     </div>
+     <div class="nav-section">
+      <div class="nav-section-title">
+       Cadastros
+      </div>
+      <div class="nav-item" data-page="items">
+       <div class="nav-icon">
+        📦
+       </div><span>Itens</span>
+      </div>
+      <div class="nav-item" data-page="services">
+       <div class="nav-icon">
+        🔧
+       </div><span>Serviços</span>
+      </div>
+     </div>
+     <div class="nav-section">
+      <div class="nav-section-title">
+       Controle
+      </div>
+      <div class="nav-item" data-page="losses">
+       <div class="nav-icon">
+        ⚠️
+       </div><span>Perdas</span>
+      </div>
+     </div>
+     <div class="nav-section">
+      <div class="nav-section-title">
+       Análises
+      </div>
+      <div class="nav-item" data-page="consumption">
+       <div class="nav-icon">
+        📈
+       </div><span>Consumo por Serviço</span>
+      </div>
+      <div class="nav-item" data-page="projection">
+       <div class="nav-icon">
+        🎯
+       </div><span>Projeção de Demanda</span>
+      </div>
+      <div class="nav-item" data-page="strategic">
+       <div class="nav-icon">
+        🎯
+       </div><span>Análise Estratégica</span>
+      </div>
+     </div>
+     <div class="nav-section">
+      <div class="nav-section-title">
+       Relatórios
+      </div>
+      <div class="nav-item" data-page="reports">
+       <div class="nav-icon">
+        📋
+       </div><span>Centro de Relatórios</span>
+      </div>
+      <div class="nav-item" data-page="analytics">
+       <div class="nav-icon">
+        📊
+       </div><span>Analytics Avançado</span>
+      </div>
+     </div>
+     <div class="nav-section">
+      <div class="nav-section-title">
+       Ferramentas
+      </div>
+      <div class="nav-item" data-page="chatbot">
+       <div class="nav-icon">
+        🤖
+       </div><span>Assistente IA</span>
+      </div>
+      <div class="nav-item" data-page="settings">
+       <div class="nav-icon">
+        ⚙️
+       </div><span>Configurações</span>
+      </div>
+     </div>
+    </nav>
+   </aside><!-- Main Content -->
+   <main class="main-content"><!-- Navbar -->
+    <nav class="navbar">
+     <div class="navbar-title">
+      <h2 id="pageTitle">Dashboard</h2>
+     </div>
+     <div class="navbar-actions"><button class="theme-toggle" id="themeToggle" title="Alternar tema"> 🌙 </button>
+      <div class="user-menu">
+       <div class="user-profile" onclick="toggleUserDropdown()">
+        <div class="user-avatar" id="userAvatar">
+         U
+        </div>
+        <div class="user-info"><span id="currentUsername">Usuário</span>
+        </div>
+       </div>
+       <div class="user-dropdown" id="userDropdown">
+        <div class="user-dropdown-item" onclick="openProfileModal()"><span>👤</span> <span>Meu Perfil</span>
+        </div>
+        <div class="user-dropdown-item" onclick="openChangePasswordModal()"><span>🔐</span> <span>Alterar Senha</span>
+        </div>
+        <div class="user-dropdown-divider"></div>
+        <div class="user-dropdown-item" onclick="logout()"><span>🚪</span> <span>Sair</span>
+        </div>
+       </div>
+      </div>
+     </div>
+    </nav><!-- Content Area -->
+    <div class="content-area"><!-- Dashboard Page -->
+     <div class="page active" id="dashboard">
+      <div class="kpi-grid">
+       <div class="kpi-card success">
+        <div class="kpi-header">
+         <div>
+          <div class="kpi-label">
+           Total de Itens
+          </div>
+          <div class="kpi-value" id="totalItems">
+           0
+          </div>
+          <div class="kpi-change positive"><span>↑</span> <span>Sistema operacional</span>
+          </div>
+         </div>
+         <div class="kpi-icon">
+          📦
+         </div>
+        </div>
+       </div>
+       <div class="kpi-card success">
+        <div class="kpi-header">
+         <div>
+          <div class="kpi-label">
+           Serviços Ativos
+          </div>
+          <div class="kpi-value" id="totalServices">
+           0
+          </div>
+          <div class="kpi-change positive"><span>↑</span> <span>Todos operacionais</span>
+          </div>
+         </div>
+         <div class="kpi-icon">
+          🔧
+         </div>
+        </div>
+       </div>
+       <div class="kpi-card warning" id="lossesCard">
+        <div class="kpi-header">
+         <div>
+          <div class="kpi-label">
+           Perdas Registradas
+          </div>
+          <div class="kpi-value" id="totalLosses">
+           0
+          </div>
+          <div class="kpi-change negative"><span>↓</span> <span>Requer atenção</span>
+          </div>
+         </div>
+         <div class="kpi-icon">
+          ⚠️
+         </div>
+        </div>
+       </div>
+       <div class="kpi-card success">
+        <div class="kpi-header">
+         <div>
+          <div class="kpi-label">
+           Status Geral
+          </div>
+          <div class="kpi-value">
+           ✓
+          </div>
+          <div class="kpi-change positive"><span>↑</span> <span id="welcomeMessage">Bem-vindo ao painel de controle</span>
+          </div>
+         </div>
+         <div class="kpi-icon">
+          ✨
+         </div>
+        </div>
+       </div>
+      </div>
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Visão Geral do Sistema</h3>
+       </div>
+       <div class="chart-container">
+        <div class="chart-placeholder">
+         📊 Gráficos de análise serão exibidos aqui
+        </div>
+       </div>
+      </div>
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Atividades Recentes</h3>
+       </div>
+       <div id="recentActivities">
+        <div class="empty-state">
+         <div class="empty-state-icon">
+          📋
+         </div>
+         <div class="empty-state-title">
+          Nenhuma atividade recente
+         </div>
+         <div class="empty-state-text">
+          Comece cadastrando itens e serviços
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Items Page -->
+     <div class="page" id="items">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Cadastrar Novo Item</h3>
+       </div>
+       <form id="itemForm">
+        <div class="form-grid">
+         <div class="form-group"><label for="itemName">Nome do Item</label> <input type="text" id="itemName" placeholder="Ex: Parafuso M8" required>
+         </div>
+         <div class="form-group"><label for="itemUnit">Unidade de Medida</label> <select id="itemUnit" required> <option value="">Selecione...</option> <option value="UN">Unidade (UN)</option> <option value="KG">Quilograma (KG)</option> <option value="L">Litro (L)</option> <option value="M">Metro (M)</option> <option value="CX">Caixa (CX)</option> </select>
+         </div>
+         <div class="form-group"><label for="itemLeadTime">Lead Time (dias)</label> <input type="number" id="itemLeadTime" placeholder="Ex: 7" min="0" required>
+         </div>
+         <div class="form-group"><label for="itemSafetyStock">Estoque de Segurança</label> <input type="number" id="itemSafetyStock" placeholder="Ex: 100" min="0" required>
+         </div>
+        </div>
+        <div class="btn-group"><button type="submit" class="btn btn-primary" id="saveItemBtn"> <span>💾</span> <span>Salvar Item</span> </button> <button type="button" class="btn btn-secondary" id="clearItemBtn"> <span>🔄</span> <span>Limpar</span> </button>
+        </div>
+       </form>
+      </div>
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Itens Cadastrados</h3>
+        <div class="card-actions"><button class="btn btn-secondary" onclick="exportToCSV('items')"> 📄 Exportar CSV </button> <button class="btn btn-secondary" onclick="exportToPDF('items')"> 📑 Exportar PDF </button>
+        </div>
+       </div><!-- Barra de Busca e Filtros Avançados -->
+       <div class="search-filter-bar">
+        <div class="search-group"><input type="text" id="itemSearch" placeholder="🔍 Buscar itens por nome..." class="search-input"> <button class="btn btn-primary" onclick="clearItemSearch()"> 🔄 Limpar </button>
+        </div>
+        <div class="filter-group"><select id="itemFilterUnit" class="filter-select"> <option value="">Todas as unidades</option> <option value="UN">Unidade (UN)</option> <option value="KG">Quilograma (KG)</option> <option value="L">Litro (L)</option> <option value="M">Metro (M)</option> <option value="CX">Caixa (CX)</option> </select> <select id="itemFilterLeadTime" class="filter-select"> <option value="">Todos os lead times</option> <option value="0-7">0-7 dias</option> <option value="8-15">8-15 dias</option> <option value="16-30">16-30 dias</option> <option value="30+">Mais de 30 dias</option> </select> <select id="itemSortBy" class="filter-select"> <option value="name">Ordenar por Nome</option> <option value="leadTime">Ordenar por Lead Time</option> <option value="safetyStock">Ordenar por Estoque</option> <option value="createdAt">Ordenar por Data</option> </select>
+        </div>
+       </div><!-- Estatísticas Rápidas -->
+       <div class="quick-stats">
+        <div class="stat-item"><span class="stat-label">Total de Itens:</span> <span class="stat-value" id="itemsCount">0</span>
+        </div>
+        <div class="stat-item"><span class="stat-label">Lead Time Médio:</span> <span class="stat-value" id="avgLeadTime">0 dias</span>
+        </div>
+        <div class="stat-item"><span class="stat-label">Estoque Total:</span> <span class="stat-value" id="totalSafetyStock">0</span>
+        </div>
+       </div>
+       <div class="table-container">
+        <table>
+         <thead>
+          <tr>
+           <th><input type="checkbox" id="selectAllItems" onchange="toggleSelectAllItems()"></th>
+           <th>Nome</th>
+           <th>Unidade</th>
+           <th>Lead Time</th>
+           <th>Estoque Segurança</th>
+           <th>Status</th>
+           <th>Ações</th>
+          </tr>
+         </thead>
+         <tbody id="itemsTableBody">
+          <tr>
+           <td colspan="7">
+            <div class="empty-state">
+             <div class="empty-state-icon">
+              📦
+             </div>
+             <div class="empty-state-title">
+              Nenhum item cadastrado
+             </div>
+             <div class="empty-state-text">
+              Cadastre seu primeiro item acima
+             </div>
+            </div></td>
+          </tr>
+         </tbody>
+        </table>
+       </div><!-- Ações em Lote -->
+       <div class="bulk-actions" id="bulkActionsItems" style="display: none;"><span id="selectedItemsCount">0 itens selecionados</span>
+        <div class="bulk-buttons"><button class="btn btn-secondary" onclick="bulkExportItems()"> 📄 Exportar Selecionados </button> <button class="btn btn-danger" onclick="bulkDeleteItems()"> 🗑️ Excluir Selecionados </button>
+        </div>
+       </div>
+      </div>
+     </div><!-- Services Page -->
+     <div class="page" id="services">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Cadastrar Novo Serviço</h3>
+       </div>
+       <form id="serviceForm">
+        <div class="form-group"><label for="serviceName">Nome do Serviço</label> <input type="text" id="serviceName" placeholder="Ex: Manutenção Preventiva" required>
+        </div>
+        <div class="btn-group"><button type="submit" class="btn btn-primary" id="saveServiceBtn"> <span>💾</span> <span>Salvar Serviço</span> </button> <button type="button" class="btn btn-secondary" id="clearServiceBtn"> <span>🔄</span> <span>Limpar</span> </button>
+        </div>
+       </form>
+      </div>
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Serviços Cadastrados</h3>
+       </div>
+       <div class="table-container">
+        <table>
+         <thead>
+          <tr>
+           <th>Nome do Serviço</th>
+           <th>Data de Cadastro</th>
+           <th>Ações</th>
+          </tr>
+         </thead>
+         <tbody id="servicesTableBody">
+          <tr>
+           <td colspan="3">
+            <div class="empty-state">
+             <div class="empty-state-icon">
+              🔧
+             </div>
+             <div class="empty-state-title">
+              Nenhum serviço cadastrado
+             </div>
+             <div class="empty-state-text">
+              Cadastre seu primeiro serviço acima
+             </div>
+            </div></td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </div><!-- Losses Page -->
+     <div class="page" id="losses">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Registrar Perda</h3><button class="btn btn-primary" id="openLossModal"> <span>➕</span> <span>Nova Perda</span> </button>
+       </div>
+      </div>
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Relatório de Perdas</h3>
+       </div>
+       <div class="filter-bar"><select id="lossFilterItem"> <option value="">Todos os itens</option> </select> <select id="lossFilterPeriod"> <option value="7">Últimos 7 dias</option> <option value="30">Últimos 30 dias</option> <option value="90">Últimos 90 dias</option> <option value="all">Todo período</option> </select>
+       </div>
+       <div class="table-container">
+        <table>
+         <thead>
+          <tr>
+           <th>Item</th>
+           <th>Quantidade</th>
+           <th>Motivo</th>
+           <th>Data</th>
+           <th>Ações</th>
+          </tr>
+         </thead>
+         <tbody id="lossesTableBody">
+          <tr>
+           <td colspan="5">
+            <div class="empty-state">
+             <div class="empty-state-icon">
+              ⚠️
+             </div>
+             <div class="empty-state-title">
+              Nenhuma perda registrada
+             </div>
+             <div class="empty-state-text">
+              Registre perdas para análise e controle
+             </div>
+            </div></td>
+          </tr>
+         </tbody>
+        </table>
+       </div>
+      </div>
+     </div><!-- Consumption Page -->
+     <div class="page" id="consumption">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Análise de Consumo por Serviço</h3>
+       </div>
+       <div class="chart-container">
+        <div class="chart-placeholder">
+         📊 Gráfico de consumo por serviço será exibido aqui
+        </div>
+       </div>
+      </div>
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Comparativo de Serviços</h3>
+       </div>
+       <div class="chart-container">
+        <div class="chart-placeholder">
+         📈 Gráfico comparativo será exibido aqui
+        </div>
+       </div>
+      </div>
+     </div><!-- Projection Page -->
+     <div class="page" id="projection">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Projeção de Demanda</h3>
+       </div>
+       <div class="chart-container">
+        <div class="chart-placeholder">
+         🎯 Gráfico de projeção de demanda será exibido aqui
+        </div>
+       </div>
+      </div>
+      <div class="kpi-grid">
+       <div class="kpi-card">
+        <div class="kpi-header">
+         <div>
+          <div class="kpi-label">
+           Demanda Prevista (30 dias)
+          </div>
+          <div class="kpi-value">
+           --
+          </div>
+          <div class="kpi-change"><span>Aguardando dados</span>
+          </div>
+         </div>
+         <div class="kpi-icon">
+          📊
+         </div>
+        </div>
+       </div>
+       <div class="kpi-card">
+        <div class="kpi-header">
+         <div>
+          <div class="kpi-label">
+           Tendência
+          </div>
+          <div class="kpi-value">
+           --
+          </div>
+          <div class="kpi-change"><span>Aguardando dados</span>
+          </div>
+         </div>
+         <div class="kpi-icon">
+          📈
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Reports Page -->
+     <div class="page" id="reports">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Centro de Relatórios</h3>
+        <div class="card-actions"><button class="btn btn-primary" onclick="generateAllReports()"> 📊 Gerar Todos os Relatórios </button>
+        </div>
+       </div>
+       <div class="reports-grid"><!-- Relatório de Itens -->
+        <div class="report-card">
+         <div class="report-header">
+          <div class="report-icon">
+           📦
+          </div>
+          <div class="report-info">
+           <h4>Relatório de Itens</h4>
+           <p>Lista completa de itens cadastrados com análises</p>
+          </div>
+         </div>
+         <div class="report-stats">
+          <div class="stat"><span class="stat-number" id="reportItemsCount">0</span> <span class="stat-label">Itens</span>
+          </div>
+          <div class="stat"><span class="stat-number" id="reportAvgLeadTime">0</span> <span class="stat-label">Lead Time Médio</span>
+          </div>
+         </div>
+         <div class="report-actions"><button class="btn btn-secondary" onclick="exportDetailedReport('items')"> 📄 CSV Detalhado </button> <button class="btn btn-secondary" onclick="exportPDFReport('items')"> 📑 PDF Executivo </button> <button class="btn btn-primary" onclick="previewReport('items')"> 👁️ Visualizar </button>
+         </div>
+        </div><!-- Relatório de Serviços -->
+        <div class="report-card">
+         <div class="report-header">
+          <div class="report-icon">
+           🔧
+          </div>
+          <div class="report-info">
+           <h4>Relatório de Serviços</h4>
+           <p>Análise completa dos serviços cadastrados</p>
+          </div>
+         </div>
+         <div class="report-stats">
+          <div class="stat"><span class="stat-number" id="reportServicesCount">0</span> <span class="stat-label">Serviços</span>
+          </div>
+          <div class="stat"><span class="stat-number" id="reportActiveServices">0</span> <span class="stat-label">Ativos</span>
+          </div>
+         </div>
+         <div class="report-actions"><button class="btn btn-secondary" onclick="exportDetailedReport('services')"> 📄 CSV Detalhado </button> <button class="btn btn-secondary" onclick="exportPDFReport('services')"> 📑 PDF Executivo </button> <button class="btn btn-primary" onclick="previewReport('services')"> 👁️ Visualizar </button>
+         </div>
+        </div><!-- Relatório de Perdas -->
+        <div class="report-card">
+         <div class="report-header">
+          <div class="report-icon">
+           ⚠️
+          </div>
+          <div class="report-info">
+           <h4>Relatório de Perdas</h4>
+           <p>Análise detalhada de perdas e desperdícios</p>
+          </div>
+         </div>
+         <div class="report-stats">
+          <div class="stat"><span class="stat-number" id="reportLossesCount">0</span> <span class="stat-label">Perdas</span>
+          </div>
+          <div class="stat"><span class="stat-number" id="reportTotalLossValue">R$ 0</span> <span class="stat-label">Valor Total</span>
+          </div>
+         </div>
+         <div class="report-actions"><button class="btn btn-secondary" onclick="exportDetailedReport('losses')"> 📄 CSV Detalhado </button> <button class="btn btn-secondary" onclick="exportPDFReport('losses')"> 📑 PDF Executivo </button> <button class="btn btn-primary" onclick="previewReport('losses')"> 👁️ Visualizar </button>
+         </div>
+        </div><!-- Relatório Estratégico -->
+        <div class="report-card">
+         <div class="report-header">
+          <div class="report-icon">
+           🎯
+          </div>
+          <div class="report-info">
+           <h4>Relatório Estratégico</h4>
+           <p>Análise estratégica completa do sistema</p>
+          </div>
+         </div>
+         <div class="report-stats">
+          <div class="stat"><span class="stat-number" id="reportEfficiency">95%</span> <span class="stat-label">Eficiência</span>
+          </div>
+          <div class="stat"><span class="stat-number" id="reportTrend">↗️</span> <span class="stat-label">Tendência</span>
+          </div>
+         </div>
+         <div class="report-actions"><button class="btn btn-secondary" onclick="exportDetailedReport('strategic')"> 📄 CSV Completo </button> <button class="btn btn-secondary" onclick="exportPDFReport('strategic')"> 📑 PDF Executivo </button> <button class="btn btn-primary" onclick="previewReport('strategic')"> 👁️ Visualizar </button>
+         </div>
+        </div>
+       </div><!-- Configurações de Relatório -->
+       <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+         <h3 class="card-title">Configurações de Relatório</h3>
+        </div>
+        <div class="form-grid">
+         <div class="form-group"><label for="reportPeriod">Período de Análise</label> <select id="reportPeriod"> <option value="7">Últimos 7 dias</option> <option value="30" selected>Últimos 30 dias</option> <option value="90">Últimos 90 dias</option> <option value="365">Último ano</option> <option value="all">Todo período</option> </select>
+         </div>
+         <div class="form-group"><label for="reportFormat">Formato de Exportação</label> <select id="reportFormat"> <option value="csv">CSV (Excel)</option> <option value="pdf">PDF</option> <option value="json">JSON</option> </select>
+         </div>
+         <div class="form-group"><label for="reportDetail">Nível de Detalhamento</label> <select id="reportDetail"> <option value="summary">Resumo Executivo</option> <option value="detailed" selected>Detalhado</option> <option value="complete">Completo com Gráficos</option> </select>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Analytics Page -->
+     <div class="page" id="analytics">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Analytics Avançado</h3>
+        <div class="card-actions"><button class="btn btn-primary" onclick="refreshAnalytics()"> 🔄 Atualizar Dados </button> <button class="btn btn-secondary" onclick="exportAnalytics()"> 📊 Exportar Analytics </button>
+        </div>
+       </div><!-- KPIs Avançados -->
+       <div class="analytics-kpis">
+        <div class="kpi-card advanced">
+         <div class="kpi-header">
+          <div class="kpi-icon">
+           📈
+          </div>
+          <div class="kpi-info">
+           <div class="kpi-label">
+            Taxa de Crescimento
+           </div>
+           <div class="kpi-value" id="growthRate">
+            +12.5%
+           </div>
+           <div class="kpi-trend positive">
+            ↗️ Crescendo
+           </div>
+          </div>
+         </div>
+         <div class="kpi-chart">
+          <div class="mini-chart" id="growthChart">
+           📊
+          </div>
+         </div>
+        </div>
+        <div class="kpi-card advanced">
+         <div class="kpi-header">
+          <div class="kpi-icon">
+           ⚡
+          </div>
+          <div class="kpi-info">
+           <div class="kpi-label">
+            Eficiência Operacional
+           </div>
+           <div class="kpi-value" id="efficiency">
+            94.2%
+           </div>
+           <div class="kpi-trend positive">
+            ↗️ Otimizada
+           </div>
+          </div>
+         </div>
+         <div class="kpi-chart">
+          <div class="mini-chart" id="efficiencyChart">
+           📊
+          </div>
+         </div>
+        </div>
+        <div class="kpi-card advanced">
+         <div class="kpi-header">
+          <div class="kpi-icon">
+           💰
+          </div>
+          <div class="kpi-info">
+           <div class="kpi-label">
+            ROI Estimado
+           </div>
+           <div class="kpi-value" id="roi">
+            R$ 45.2K
+           </div>
+           <div class="kpi-trend positive">
+            ↗️ Positivo
+           </div>
+          </div>
+         </div>
+         <div class="kpi-chart">
+          <div class="mini-chart" id="roiChart">
+           📊
+          </div>
+         </div>
+        </div>
+        <div class="kpi-card advanced">
+         <div class="kpi-header">
+          <div class="kpi-icon">
+           🎯
+          </div>
+          <div class="kpi-info">
+           <div class="kpi-label">
+            Precisão de Demanda
+           </div>
+           <div class="kpi-value" id="accuracy">
+            87.8%
+           </div>
+           <div class="kpi-trend positive">
+            ↗️ Precisa
+           </div>
+          </div>
+         </div>
+         <div class="kpi-chart">
+          <div class="mini-chart" id="accuracyChart">
+           📊
+          </div>
+         </div>
+        </div>
+       </div><!-- Gráficos Avançados -->
+       <div class="analytics-charts">
+        <div class="chart-card">
+         <div class="chart-header">
+          <h4>Análise de Tendências</h4><select id="trendPeriod"> <option value="7">7 dias</option> <option value="30" selected>30 dias</option> <option value="90">90 dias</option> </select>
+         </div>
+         <div class="chart-container advanced">
+          <div class="chart-placeholder">
+           📈 Gráfico de tendências será exibido aqui
+          </div>
+         </div>
+        </div>
+        <div class="chart-card">
+         <div class="chart-header">
+          <h4>Distribuição por Categoria</h4><button class="btn btn-secondary" onclick="toggleChartType()"> 🔄 Alternar Tipo </button>
+         </div>
+         <div class="chart-container advanced">
+          <div class="chart-placeholder">
+           🥧 Gráfico de distribuição será exibido aqui
+          </div>
+         </div>
+        </div>
+       </div><!-- Insights Automáticos -->
+       <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+         <h3 class="card-title">Insights Automáticos</h3>
+        </div>
+        <div class="insights-container" id="insightsContainer">
+         <div class="insight-item positive">
+          <div class="insight-icon">
+           ✅
+          </div>
+          <div class="insight-content">
+           <h4>Oportunidade Identificada</h4>
+           <p>Itens com lead time baixo podem ter estoque de segurança reduzido, economizando 15% em custos.</p>
+          </div>
+         </div>
+         <div class="insight-item warning">
+          <div class="insight-icon">
+           ⚠️
+          </div>
+          <div class="insight-content">
+           <h4>Atenção Necessária</h4>
+           <p>3 itens apresentam padrão de perdas acima da média. Recomenda-se revisão dos processos.</p>
+          </div>
+         </div>
+         <div class="insight-item info">
+          <div class="insight-icon">
+           💡
+          </div>
+          <div class="insight-content">
+           <h4>Sugestão de Melhoria</h4>
+           <p>Implementar alertas automáticos para itens com lead time superior a 20 dias.</p>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Strategic Analysis Page -->
+     <div class="page" id="strategic">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Análise Estratégica</h3>
+        <div class="card-actions"><button class="btn btn-primary" onclick="generateStrategicReport()"> 📊 Gerar Relatório Estratégico </button>
+        </div>
+       </div><!-- Matriz SWOT -->
+       <div class="swot-matrix">
+        <div class="swot-header">
+         <h4>Matriz SWOT - Análise Estratégica</h4>
+        </div>
+        <div class="swot-grid">
+         <div class="swot-quadrant strengths">
+          <h5>💪 Forças</h5>
+          <ul id="swotStrengths">
+           <li>Sistema integrado de gestão</li>
+           <li>Controle eficiente de perdas</li>
+           <li>Previsibilidade de demanda</li>
+          </ul>
+         </div>
+         <div class="swot-quadrant weaknesses">
+          <h5>⚠️ Fraquezas</h5>
+          <ul id="swotWeaknesses">
+           <li>Dependência de dados históricos</li>
+           <li>Necessita treinamento da equipe</li>
+          </ul>
+         </div>
+         <div class="swot-quadrant opportunities">
+          <h5>🚀 Oportunidades</h5>
+          <ul id="swotOpportunities">
+           <li>Automação de processos</li>
+           <li>Integração com fornecedores</li>
+           <li>Analytics preditivo</li>
+          </ul>
+         </div>
+         <div class="swot-quadrant threats">
+          <h5>⚡ Ameaças</h5>
+          <ul id="swotThreats">
+           <li>Volatilidade do mercado</li>
+           <li>Mudanças regulatórias</li>
+          </ul>
+         </div>
+        </div>
+       </div><!-- Indicadores Estratégicos -->
+       <div class="strategic-indicators">
+        <div class="indicator-card">
+         <div class="indicator-header">
+          <h4>🎯 Metas vs Realizado</h4>
+         </div>
+         <div class="indicator-content">
+          <div class="progress-item"><span>Redução de Perdas</span>
+           <div class="progress-bar">
+            <div class="progress-fill" style="width: 75%"></div>
+           </div><span>75%</span>
+          </div>
+          <div class="progress-item"><span>Eficiência Operacional</span>
+           <div class="progress-bar">
+            <div class="progress-fill" style="width: 92%"></div>
+           </div><span>92%</span>
+          </div>
+          <div class="progress-item"><span>Precisão de Previsão</span>
+           <div class="progress-bar">
+            <div class="progress-fill" style="width: 88%"></div>
+           </div><span>88%</span>
+          </div>
+         </div>
+        </div>
+        <div class="indicator-card">
+         <div class="indicator-header">
+          <h4>📈 Benchmarking</h4>
+         </div>
+         <div class="indicator-content">
+          <div class="benchmark-item"><span>Lead Time Médio</span>
+           <div class="benchmark-comparison">
+            <div class="benchmark-bar our" style="width: 60%">
+             Nossa: 12 dias
+            </div>
+            <div class="benchmark-bar market" style="width: 80%">
+             Mercado: 15 dias
+            </div>
+           </div>
+          </div>
+          <div class="benchmark-item"><span>Taxa de Perdas</span>
+           <div class="benchmark-comparison">
+            <div class="benchmark-bar our" style="width: 30%">
+             Nossa: 2.1%
+            </div>
+            <div class="benchmark-bar market" style="width: 50%">
+             Mercado: 3.5%
+            </div>
+           </div>
+          </div>
+         </div>
+        </div>
+       </div><!-- Recomendações Estratégicas -->
+       <div class="card" style="margin-top: 24px;">
+        <div class="card-header">
+         <h3 class="card-title">Recomendações Estratégicas</h3>
+        </div>
+        <div class="recommendations-list">
+         <div class="recommendation-item high-priority">
+          <div class="recommendation-priority">
+           Alta
+          </div>
+          <div class="recommendation-content">
+           <h4>Otimização de Estoque</h4>
+           <p>Implementar sistema de reposição automática para itens críticos, reduzindo custos em 20%.</p>
+           <div class="recommendation-impact">
+            Impacto: R$ 25.000/mês
+           </div>
+          </div>
+         </div>
+         <div class="recommendation-item medium-priority">
+          <div class="recommendation-priority">
+           Média
+          </div>
+          <div class="recommendation-content">
+           <h4>Treinamento da Equipe</h4>
+           <p>Capacitar equipe em análise de dados para melhor tomada de decisão.</p>
+           <div class="recommendation-impact">
+            Impacto: Melhoria de 15% na eficiência
+           </div>
+          </div>
+         </div>
+         <div class="recommendation-item low-priority">
+          <div class="recommendation-priority">
+           Baixa
+          </div>
+          <div class="recommendation-content">
+           <h4>Integração com Fornecedores</h4>
+           <p>Conectar sistema com fornecedores para visibilidade em tempo real.</p>
+           <div class="recommendation-impact">
+            Impacto: Redução de 30% no lead time
+           </div>
+          </div>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div><!-- Settings Page -->
+     <div class="page" id="settings">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Configurações do Sistema</h3>
+       </div>
+       <div class="settings-sections">
+        <div class="settings-section">
+         <h4>🎨 Personalização</h4>
+         <div class="form-grid">
+          <div class="form-group"><label for="systemTheme">Tema do Sistema</label> <select id="systemTheme"> <option value="dark">Escuro</option> <option value="light">Claro</option> <option value="auto">Automático</option> </select>
+          </div>
+          <div class="form-group"><label for="systemLanguage">Idioma</label> <select id="systemLanguage"> <option value="pt-BR">Português (Brasil)</option> <option value="en-US">English (US)</option> <option value="es-ES">Español</option> </select>
+          </div>
+         </div>
+        </div>
+        <div class="settings-section">
+         <h4>📊 Relatórios</h4>
+         <div class="form-grid">
+          <div class="form-group"><label for="defaultReportPeriod">Período Padrão</label> <select id="defaultReportPeriod"> <option value="7">7 dias</option> <option value="30" selected>30 dias</option> <option value="90">90 dias</option> </select>
+          </div>
+          <div class="form-group"><label for="autoExport">Exportação Automática</label> <select id="autoExport"> <option value="disabled">Desabilitada</option> <option value="daily">Diária</option> <option value="weekly">Semanal</option> <option value="monthly">Mensal</option> </select>
+          </div>
+         </div>
+        </div>
+        <div class="settings-section">
+         <h4>🔔 Notificações</h4>
+         <div class="checkbox-group"><label class="checkbox-item"> <input type="checkbox" id="notifyLowStock" checked> <span>Alertas de estoque baixo</span> </label> <label class="checkbox-item"> <input type="checkbox" id="notifyHighLosses" checked> <span>Alertas de perdas elevadas</span> </label> <label class="checkbox-item"> <input type="checkbox" id="notifyReports" checked> <span>Relatórios automáticos</span> </label>
+         </div>
+        </div>
+        <div class="settings-section">
+         <h4>💾 Dados</h4>
+         <div class="data-management"><button class="btn btn-secondary" onclick="exportAllData()"> 📤 Exportar Todos os Dados </button> <button class="btn btn-secondary" onclick="importData()"> 📥 Importar Dados </button> <button class="btn btn-danger" onclick="clearAllData()"> 🗑️ Limpar Todos os Dados </button>
+         </div>
+        </div>
+       </div>
+       <div class="btn-group"><button class="btn btn-primary" onclick="saveSettings()"> 💾 Salvar Configurações </button> <button class="btn btn-secondary" onclick="resetSettings()"> 🔄 Restaurar Padrões </button>
+       </div>
+      </div>
+     </div><!-- Chatbot Page -->
+     <div class="page" id="chatbot">
+      <div class="card">
+       <div class="card-header">
+        <h3 class="card-title">Assistente Virtual - IA</h3>
+       </div>
+       <div class="chatbot-container">
+        <div class="chat-messages" id="chatMessages">
+         <div class="chat-message bot">
+          <div class="chat-avatar">
+           🤖
+          </div>
+          <div class="chat-bubble">
+           Olá! Sou seu assistente virtual. Como posso ajudá-lo hoje? Posso fornecer informações sobre itens, serviços, perdas e análises do sistema.
+          </div>
+         </div>
+        </div>
+        <div class="chat-input-container">
+         <div class="chat-input-wrapper"><input type="text" id="chatInput" placeholder="Digite sua mensagem..."> <button class="chat-send-btn" id="chatSendBtn"> ➤ </button>
+         </div>
+        </div>
+       </div>
+      </div>
+     </div>
+    </div>
+   </main>
+  </div><!-- Profile Modal -->
+  <div class="modal-overlay profile-modal" id="profileModal">
+   <div class="modal">
+    <div class="modal-header">
+     <h3 class="modal-title">Meu Perfil</h3><button class="modal-close" onclick="closeProfileModal()">✕</button>
+    </div>
+    <div class="profile-avatar-section">
+     <div class="profile-avatar-large" id="profileAvatarLarge">
+      U
+     </div>
+     <div class="profile-info">
+      <h3 id="profileDisplayName">Usuário</h3>
+      <p>Administrador do Sistema</p>
+     </div>
+    </div>
+    <div class="profile-section">
+     <h4>👤 Informações Pessoais</h4>
+     <div class="form-grid">
+      <div class="form-group"><label for="profileUsername">Nome de Usuário</label> <input type="text" id="profileUsername" readonly>
+      </div>
+      <div class="form-group"><label for="profileEmail">E-mail</label> <input type="email" id="profileEmail" placeholder="usuario@empresa.com">
+      </div>
+     </div>
+    </div>
+    <div class="profile-section">
+     <h4>🔐 Segurança</h4>
+     <div class="form-group"><label for="currentPassword">Senha Atual</label> <input type="password" id="currentPassword" placeholder="Digite sua senha atual">
+     </div>
+     <div class="form-group"><label for="newPassword">Nova Senha</label> <input type="password" id="newPassword" placeholder="Digite a nova senha" oninput="checkPasswordStrength()">
+      <div class="password-strength" id="passwordStrength" style="display: none;">
+       <div class="strength-bar">
+        <div class="strength-fill"></div>
+       </div>
+       <div class="strength-text">
+        Força da senha
+       </div>
+      </div>
+     </div>
+     <div class="form-group"><label for="confirmPassword">Confirmar Nova Senha</label> <input type="password" id="confirmPassword" placeholder="Confirme a nova senha">
+     </div>
+    </div>
+    <div class="btn-group"><button class="btn btn-primary" onclick="saveProfile()"> 💾 Salvar Alterações </button> <button class="btn btn-secondary" onclick="closeProfileModal()"> ❌ Cancelar </button>
+    </div>
+   </div>
+  </div><!-- Change Password Modal -->
+  <div class="modal-overlay" id="changePasswordModal">
+   <div class="modal">
+    <div class="modal-header">
+     <h3 class="modal-title">Alterar Senha</h3><button class="modal-close" onclick="closeChangePasswordModal()">✕</button>
+    </div>
+    <form id="changePasswordForm">
+     <div class="form-group"><label for="oldPassword">Senha Atual</label> <input type="password" id="oldPassword" placeholder="Digite sua senha atual" required>
+     </div>
+     <div class="form-group"><label for="newPasswordChange">Nova Senha</label> <input type="password" id="newPasswordChange" placeholder="Digite a nova senha" required oninput="checkPasswordStrengthChange()">
+      <div class="password-strength" id="passwordStrengthChange" style="display: none;">
+       <div class="strength-bar">
+        <div class="strength-fill"></div>
+       </div>
+       <div class="strength-text">
+        Força da senha
+       </div>
+      </div>
+     </div>
+     <div class="form-group"><label for="confirmPasswordChange">Confirmar Nova Senha</label> <input type="password" id="confirmPasswordChange" placeholder="Confirme a nova senha" required>
+     </div>
+     <div class="btn-group"><button type="submit" class="btn btn-primary"> 🔐 Alterar Senha </button> <button type="button" class="btn btn-secondary" onclick="closeChangePasswordModal()"> ❌ Cancelar </button>
+     </div>
+    </form>
+   </div>
+  </div><!-- Loss Modal -->
+  <div class="modal-overlay" id="lossModal">
+   <div class="modal">
+    <div class="modal-header">
+     <h3 class="modal-title">Registrar Perda</h3><button class="modal-close" id="closeLossModal">✕</button>
+    </div>
+    <form id="lossForm">
+     <div class="form-group"><label for="lossItem">Item</label> <select id="lossItem" required> <option value="">Selecione um item...</option> </select>
+     </div>
+     <div class="form-group"><label for="lossQuantity">Quantidade</label> <input type="number" id="lossQuantity" placeholder="Ex: 10" min="1" required>
+     </div>
+     <div class="form-group"><label for="lossReason">Motivo</label> <textarea id="lossReason" placeholder="Descreva o motivo da perda..." required></textarea>
+     </div>
+     <div class="form-group"><label for="lossDate">Data</label> <input type="date" id="lossDate" required>
+     </div>
+     <div class="btn-group"><button type="submit" class="btn btn-primary" id="saveLossBtn"> <span>💾</span> <span>Registrar Perda</span> </button> <button type="button" class="btn btn-secondary" id="cancelLossBtn"> <span>✕</span> <span>Cancelar</span> </button>
+     </div>
+    </form>
+   </div>
+  </div>
+ <script src="scrpt.js"></script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999fe602b1ea8303',t:'MTc2MjM4MjkwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
