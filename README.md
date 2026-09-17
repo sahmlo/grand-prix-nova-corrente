@@ -173,14 +173,14 @@ Projeto desenvolvido colaborativamente durante o **Grand Prix de Inovação do S
 | Integrante | Participação |
 |---|---|
 | **Sara Melo** | Front-end, PM e Modelagem |
-| **Ericson** | Back-end, Power BI, PM e Modelagem |
+| **Ericsson** | Back-end, Power BI, PM e Modelagem |
 | **Luiz** | Front-end |
 | **Douglas** | Front-end |
 | **Cauan** | Documentação |
 
 ### 🔗 LinkedIn
 
-- **Ericson:** [LinkedIn](https://www.linkedin.com/in/ericsson-dos-santos/)
+- **Ericsson:** [LinkedIn](https://www.linkedin.com/in/ericsson-dos-santos/)
 - **Luiz:** [LinkedIn](https://www.linkedin.com/in/luis-fernando-front-end/)
 - **Douglas:** [LinkedIn](https://www.linkedin.com/in/douglass154/)
 - **Cauan:** [LinkedIn](https://www.linkedin.com/in/caua-santos-069aa6390/)
