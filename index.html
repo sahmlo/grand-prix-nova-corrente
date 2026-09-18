@@ -3,7 +3,9 @@
  <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nova Corrente - Previsibilidade de Demanda</title>
+  <meta name="theme-color" content="#0a0e1a">
+  <meta name="description" content="Nova Corrente — sistema de previsibilidade de demanda desenvolvido durante o Grand Prix de Inovação do SENAI.">
+  <title>Nova Corrente | Previsibilidade de Demanda</title>
   <script src="/_sdk/data_sdk.js"></script>
   <script src="/_sdk/element_sdk.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
@@ -11,7 +13,8 @@
   <style>@view-transition { navigation: auto; }</style>
   <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
  </head>
- <body><!-- Login Screen -->
+ <body>
+  <!-- ==================== TELA DE LOGIN ==================== -->
   <div class="login-screen" id="loginScreen">
    <div class="login-container">
     <div class="login-header">
@@ -47,7 +50,9 @@
     </div>
    </div>
   </div>
-  <div class="app-container" id="appContainer" style="display: none;"><!-- Sidebar -->
+  <!-- ==================== APLICAÇÃO PRINCIPAL ==================== -->
+  <div class="app-container" id="appContainer" style="display: none;">
+   <!-- ==================== SIDEBAR ==================== -->
    <aside class="sidebar" id="sidebar">
     <div class="sidebar-header">
      <div class="logo">
@@ -181,8 +186,11 @@
       </div>
      </div>
     </nav>
-   </aside><!-- Main Content -->
-   <main class="main-content"><!-- Navbar -->
+   </aside>
+
+   <!-- ==================== CONTEÚDO PRINCIPAL ==================== -->
+   <main class="main-content">
+    <!-- ==================== BARRA SUPERIOR ==================== -->
     <nav class="navbar">
      <div class="navbar-title">
       <h2 id="pageTitle">Dashboard</h2>
@@ -207,8 +215,10 @@
        </div>
       </div>
      </div>
-    </nav><!-- Content Area -->
-    <div class="content-area"><!-- Dashboard Page -->
+    </nav>
+
+    <!-- ==================== ÁREA DE CONTEÚDO ==================== -->
+    <div class="content-area"><!-- Dashboard -->
      <div class="page active" id="dashboard">
       <div class="kpi-grid">
        <div class="kpi-card success">
@@ -308,7 +318,7 @@
         </div>
        </div>
       </div>
-     </div><!-- Items Page -->
+     </div><!-- Itens -->
      <div class="page" id="items">
       <div class="card">
        <div class="card-header">
@@ -385,7 +395,7 @@
         </div>
        </div>
       </div>
-     </div><!-- Services Page -->
+     </div><!-- Serviços -->
      <div class="page" id="services">
       <div class="card">
        <div class="card-header">
@@ -430,7 +440,7 @@
         </table>
        </div>
       </div>
-     </div><!-- Losses Page -->
+     </div><!-- Perdas -->
      <div class="page" id="losses">
       <div class="card">
        <div class="card-header">
@@ -473,7 +483,7 @@
         </table>
        </div>
       </div>
-     </div><!-- Consumption Page -->
+     </div><!-- Consumo por serviço -->
      <div class="page" id="consumption">
       <div class="card">
        <div class="card-header">
@@ -495,7 +505,7 @@
         </div>
        </div>
       </div>
-     </div><!-- Projection Page -->
+     </div><!-- Projeção de demanda -->
      <div class="page" id="projection">
       <div class="card">
        <div class="card-header">
@@ -543,7 +553,7 @@
         </div>
        </div>
       </div>
-     </div><!-- Reports Page -->
+     </div><!-- Relatórios -->
      <div class="page" id="reports">
       <div class="card">
        <div class="card-header">
@@ -643,7 +653,7 @@
         </div>
        </div>
       </div>
-     </div><!-- Analytics Page -->
+     </div><!-- Analytics -->
      <div class="page" id="analytics">
       <div class="card">
        <div class="card-header">
@@ -802,7 +812,7 @@
         </div>
        </div>
       </div>
-     </div><!-- Strategic Analysis Page -->
+     </div><!-- Análise estratégica -->
      <div class="page" id="strategic">
       <div class="card">
        <div class="card-header">
@@ -942,7 +952,7 @@
         </div>
        </div>
       </div>
-     </div><!-- Settings Page -->
+     </div><!-- Configurações -->
      <div class="page" id="settings">
       <div class="card">
        <div class="card-header">
@@ -981,7 +991,7 @@
        <div class="btn-group"><button class="btn btn-primary" onclick="saveSettings()"> 💾 Salvar Configurações </button> <button class="btn btn-secondary" onclick="resetSettings()"> 🔄 Restaurar Padrões </button>
        </div>
       </div>
-     </div><!-- Chatbot Page -->
+     </div><!-- Assistente IA -->
      <div class="page" id="chatbot">
       <div class="card">
        <div class="card-header">
@@ -1007,7 +1017,8 @@
      </div>
     </div>
    </main>
-  </div><!-- Profile Modal -->
+  </div><!-- ==================== MODAIS ==================== -->
+  <!-- Perfil do usuário -->
   <div class="modal-overlay profile-modal" id="profileModal">
    <div class="modal">
     <div class="modal-header">
@@ -1051,7 +1062,7 @@
     <div class="btn-group"><button class="btn btn-primary" onclick="saveProfile()"> 💾 Salvar Alterações </button> <button class="btn btn-secondary" onclick="closeProfileModal()"> ❌ Cancelar </button>
     </div>
    </div>
-  </div><!-- Change Password Modal -->
+  </div><!-- Alteração de senha -->
   <div class="modal-overlay" id="changePasswordModal">
    <div class="modal">
     <div class="modal-header">
@@ -1076,7 +1087,7 @@
      </div>
     </form>
    </div>
-  </div><!-- Loss Modal -->
+  </div><!-- Registro de perda -->
   <div class="modal-overlay" id="lossModal">
    <div class="modal">
     <div class="modal-header">
@@ -1096,6 +1107,7 @@
     </form>
    </div>
   </div>
- <script src="scrpt.js"></script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'999fe602b1ea8303',t:'MTc2MjM4MjkwNC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+  <!-- ==================== JAVASCRIPT DA APLICAÇÃO ==================== -->
+  <script src="script.js"></script>
+</body>
 </html>
